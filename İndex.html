@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Sayfam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #35424a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            background: #35424a;
+            border-radius: 5px;
+        }
+        nav a.active {
+            background: #5c6bc0; /* Aktif sekme rengi */
+        }
+        .tab-content {
+            display: none;
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .active-content {
+            display: block; /* Aktif içerik göster */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Blog Sayfam</h1>
+    <nav>
+        <a href="#" class="tab-link active" onclick="openTab(event, 'anasayfa')">Ana Sayfa</a>
+        <a href="#" class="tab-link" onclick="openTab(event, 'hakkimda')">Hakkımda</a>
+        <a href="#" class="tab-link" onclick="openTab(event, 'anket')">Anket</a>
+        <a href="#" class="tab-link" onclick="openTab(event, 'iletisim')">İletişim</a>
+    </nav>
+</header>
+
+<div id="anasayfa" class="tab-content active-content">
+    <h2>Ana Sayfa</h2>
+    <p>Bloguma hoş geldiniz! Burada güncel yazılarımı ve düşüncelerimi bulabilirsiniz.</p>
+</div>
+
+<div id="hakkimda" class="tab-content">
+    <h2>Hakkımda</h2>
+    <p>Ben [Adınız], yazmayı ve paylaşmayı seven bir bireyim. İlgi alanlarım arasında [ilgi alanlarınız] yer alıyor.</p>
+</div>
+
+<div id="anket" class="tab-content">
+    <h2>Anket</h2>
+    <form id="surveyForm" onsubmit="return showThankYouMessage();">
+        <p>Blogumu nasıl buldunuz? (Birden fazla seçeneği işaretleyebilirsiniz):</p>
+        <label><input type="checkbox" name="feedback" value="Yararlı"> Yararlı</label><br>
+        <label><input type="checkbox" name="feedback" value="Eğlenceli"> Eğlenceli</label><br>
+        <label><input type="checkbox" name="feedback" value="Bilgilendirici"> Bilgilendirici</label><br>
+        <label><input type="checkbox" name="feedback" value="Sıradan"> Sıradan</label><br>
+        <label><input type="checkbox" name="feedback" value="Diğer"> Diğer</label><br>
+        <br>
+        <input type="submit" value="Gönder">
+    </form>
+    <p id="thankYouMessage" style="display: none;">Teşekkürler! Geri bildiriminiz alındı.</p>
+</div>
+
+<div id="iletisim" class="tab-content">
+    <h2>İletişim</h2>
+    <p>Bana ulaşmak için e-posta: [email@example.com]</p>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        // Tüm sekmeleri gizle
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(content => {
+            content.classList.remove('active-content');
+        });
+
+        // Tüm linklerin aktif sınıfını kaldır
+        const tabLinks = document.querySelectorAll('.tab-link');
+        tabLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Aktif olan sekmeyi göster
+        document.getElementById(tabName).classList.add('active-content');
+        evt.currentTarget.classList.add('active');
+    }
+
+    function showThankYouMessage() {
+        document.getElementById('surveyForm').reset(); // Formu sıfırla
+        document.getElementById('thankYouMessage').style.display = 'block'; // Teşekkür mesajını göster
+        return false; // Formun gönderimini engelle
+    }
+</script>
+
+</body>
+</html>
